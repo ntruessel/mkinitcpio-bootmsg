@@ -2,7 +2,7 @@
 
 build() {
 	(
-		. /etc/default/bootmsg.conf
+		. /etc/bootmsg.conf
 		echo "${MESSAGE}" > $BUILDROOT/bootmsg
 	) && add_runscript
 }
