@@ -1,0 +1,14 @@
+#!/bin/bash
+
+build() {
+	(
+		. /etc/default/bootmsg.conf
+		echo "${MESSAGE}" > $BUILDROOT/bootmsg
+	) && add_runscript
+}
+
+help() {
+	cat <<HELPEOF
+This hooks allows to output an arbitrary boot message.
+HELPEOF
+}
