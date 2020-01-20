@@ -1,10 +1,14 @@
 #!/bin/bash
 
 build() {
-	(
+	if add_systemd_unit bootmsg.service 2>/dev/null; then
+		add_file /etc/bootmsg.conf
+		add_symlink "/usr/lib/systemd/system/sysinit.target.wants/bootmsg.service" "../bootmsg.service"
+	else
 		. /etc/bootmsg.conf
 		echo "${MESSAGE}" > $BUILDROOT/bootmsg
-	) && add_runscript
+		add_runscript
+	fi
 }
 
 help() {
