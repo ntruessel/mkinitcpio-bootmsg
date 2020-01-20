@@ -1,0 +1,12 @@
+[Unit]
+Description=bootmsg
+DefaultDependencies=no
+After=systemd-vconsole-setup.service
+Before=sysinit.target systemd-ask-password-console.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+StandardOutput=tty
+EnvironmentFile=/etc/bootmsg.conf
+ExecStart=/usr/bin/printf '%%s\n' "${MESSAGE}"
